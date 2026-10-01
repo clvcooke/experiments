@@ -2,5 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "event-boundary-experiment",
   "pages_build_output_dir": "./dist",
+  "assets": {
+    "directory": "./dist"
+  },
   "compatibility_date": "2025-02-01"
 }
