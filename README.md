@@ -1,32 +1,50 @@
-# React + TypeScript + Vite
+# Event Boundary Recall & Memory Formation Prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An experimental web application testing the impact of event boundaries (pause durations, visual fixation crosses, context cues) on video recall and memory formation in short-form vertical feed environments (e.g., TikTok/Reels style).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Mobile-First TikTok-Style Video Feed**: Vertical scrolling, play/pause, volume control, progress tracking, and fallback video visualizers.
+- **Event Boundary Control Engine**:
+  - Customizable pause durations (0s to 10s).
+  - Multiple boundary visual stimulus types: `none` (instant transition), `fixation` (fixation cross), `black` (silent black screen), `visual_cue` (segment context transition), and `custom_text`.
+  - Flow controls: Auto-advance feed vs. participant manual swipe.
+- **Condition Presets & Shareable Links**: Select pre-configured research conditions or fine-tune parameters into shareable URL parameters (e.g., `?pause=3&boundary=fixation&autoAdvance=true`).
+- **Memory Assessment & Researcher Export**: Post-viewing recall quizzes with instant score calculation and downloadable JSON/CSV trial logs.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Cloudflare Pages Deployment & GitHub Integration
 
-## Expanding the Oxlint configuration
+This project is configured for automated preview deployments on Cloudflare Pages via GitHub Actions.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### Setting up Cloudflare Pages Previews on GitHub:
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+1. **Create Cloudflare Pages Project**:
+   - Log into your [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to **Workers & Pages**.
+   - Create a new Pages project named `event-boundary-experiment`.
+
+2. **Add GitHub Repository Secrets**:
+   - In your GitHub Repository, navigate to **Settings -> Secrets and variables -> Actions**.
+   - Add the following secrets:
+     - `CLOUDFLARE_API_TOKEN`: Cloudflare API token with **Cloudflare Pages: Edit** permissions.
+     - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare Account ID (found in dashboard URL or API section).
+
+3. **Automatic PR Previews**:
+   - Every Pull Request or commit pushed to GitHub automatically triggers `.github/workflows/deploy-cloudflare.yml`.
+   - Cloudflare Pages generates a unique preview URL for each pull request.
+
+---
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev
+
+# Run production build
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
